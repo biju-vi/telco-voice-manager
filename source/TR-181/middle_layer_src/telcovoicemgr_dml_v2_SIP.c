@@ -3451,7 +3451,7 @@ ULONG TelcoVoiceMgrDml_SIP_NetworkList_GetParamStringValue(ANSC_HANDLE hInsConte
        
         // data lock is not required at this point as "uVsIndex" and "uNetworkIndex" are already calculated
         // json hal call on voice stack is already a blocking call with its own locking
-        CcspTraceInfo(("%s:%d:: Releasing lock for OutboundProxyResolvedAddress \n", __FUNCTION__, __LINE__));
+        CcspTraceInfo(("[%s:%d] Releasing lock for OutboundProxyResolvedAddress \n", __FUNCTION__, __LINE__));
 
         TELCOVOICEMGR_UNLOCK()
         //Fetch status from voice stack
@@ -3460,16 +3460,16 @@ ULONG TelcoVoiceMgrDml_SIP_NetworkList_GetParamStringValue(ANSC_HANDLE hInsConte
 
         snprintf(req_param.name, sizeof(req_param.name), "Device.Services.VoiceService.%d.SIP.Network.%d.OutboundProxyResolvedAddress",
                  uVsIndex,uNetworkIndex );
-        CcspTraceInfo(("%s:%d:: Calling TelcoVoiceHal_GetSingleParameter \n", __FUNCTION__, __LINE__));
+        CcspTraceInfo(("[%s:%d] Calling TelcoVoiceHal_GetSingleParameter \n", __FUNCTION__, __LINE__));
         if (ANSC_STATUS_SUCCESS == TelcoVoiceHal_GetSingleParameter(&req_param))
         {
-            CcspTraceInfo(("%s:%d:: OutboundProxyResolvedAddress value obtained \n", __FUNCTION__, __LINE__));
+            CcspTraceInfo(("[%s:%d] OutboundProxyResolvedAddress value obtained \n", __FUNCTION__, __LINE__));
             AnscCopyString(pValue, req_param.value);
             ret = 0;
         }
         else
         {
-            CcspTraceError(("%s:%d:: OutboundProxyResolvedAddress:get failed \n", __FUNCTION__, __LINE__));
+            CcspTraceError(("[%s:%d] OutboundProxyResolvedAddress:get failed \n", __FUNCTION__, __LINE__));
         }
         return ret;
     }
